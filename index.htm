@@ -1,0 +1,154 @@
+<!doctype HTML>
+<html>
+    <head>
+        <title> Sock Store </title>
+
+        <style>
+            /* 
+                  ** Isaac Shon, Computer Programming,
+                  Mr. Joseph Period 3. Completed on 
+                  12 November, 2017  **             
+                                                      */
+
+            
+            /* The images, text boxes and buttons will be resized. */
+
+            img{
+                width: 200px;
+                border-style: solid;
+                border-width: medium;
+
+            }
+            input{
+                width:95px;
+            }
+            button{
+                width: 175px;
+            }
+            p {
+                word-break: break-all;
+            }
+
+            /* This section will color the website background, header and item description color/fonts. */
+            body {
+                background-color: #659EC7;
+            }
+            h1 {
+                color: #FFFFFF;
+                font-family: "Copperplate Gothic";
+                text-align: center;
+                font-size: 36px;
+            }
+            p {
+                color: #FFFFFF;
+                border: 2px solid black;
+                margin: auto;    
+                padding: 20px;
+                
+            }
+            p {
+                font-family: "euphemia",Arial, Helvetica, sans-serif;
+                font-size: 17px;
+            }
+            span {
+                font-size: 20px;
+            }
+
+
+        </style>
+
+        <script>
+            //Defines global variables
+            var pr1 = 10, Wpr1=7;
+            var pr2 = 12, Wpr2=9;
+            var pr3 = 15, Wpr3=12;
+            var taxRate = 8.75;
+
+            function initPrices(){
+                document.getElementById("span1").innerHTML = "Price: $" + pr1;
+                document.getElementById("span2").innerHTML = "Price: $" + pr2; 
+                document.getElementById("span3").innerHTML = "Price: $" + pr3;  
+            }
+            
+            //Calculates subtotals, profit, quantity, shipping and tax.
+
+            function ProcessOrder(){
+                var op = document.getElementById("output");
+                var q1 = parseInt(document.getElementById("qty1").value);
+                var q2 = parseInt(document.getElementById("qty2").value);
+                var q3 = parseInt(document.getElementById("qty3").value);
+
+                var CustSub=(pr1*q1)+(pr2*q2)+(pr3*q3);
+                var CompanySubtotal= (Wpr1*q1)+(Wpr2*q2)+(Wpr3*q3);
+                var profit= CustSub-CompanySubtotal;
+                var TotalItem= q1+q2+q3;
+                var tax= parseFloat((CustSub * taxRate/100).toFixed(2));
+                var Shipping;
+
+            if(CustSub < 100){
+            Shipping = 25
+            }else if(CustSub >= 100 && CustSub <= 200){
+            Shipping = 10
+            }else{
+            Shipping = 0
+            }
+            var CustTotal = CustSub + tax + Shipping;
+            
+            //Display Receipt Information
+
+            var build = " ";
+            build += "<br><hr>";
+            build += "<u> Customer Information </u> <br>";
+            build += "Subtotal: $" + CustSub + "<br>";
+            build += "Tax: $" + tax + "<br>";
+            build += "Shipping: $" + Shipping + "<br>";
+            build += "Total: $" + CustTotal + "<br><hr>";
+            build += "<u> Company Information </u><br>";
+            build += "Customer Subtotal: $" + CustSub + "<br>";
+            build += "Company Subtotal: $" + CompanySubtotal + "<br>";
+            build += "Profit: $" + profit + "<br>";
+            build += "Total Items Sold: " + TotalItem;
+            op.innerHTML = build;
+
+            }
+
+        </script>
+
+    </head>
+
+<!-- The body section is used to display the items being sold. -->
+
+    <body onload="initPrices()">
+        <h1> Isaac's Sock Store </h1>
+        <!-- Item 1 -->
+        <div>
+            <img src = "vetements.jpg"><br>
+            <p> Vetements Socks - Vetements is a French clothing and footwear collective founded by Demna Gvasalia in 2009. Gvasalia reflects a very "pragmatic" approach to fashion.</p><br>
+            <span id = "span1"></span><br>
+            <input type = "text" id = "qty1" placeholder = "Enter quantity #">
+        </div>
+
+        <hr>
+        <!-- Item 2 -->
+        <div>
+            <img src = "gosha_rubchinskiy.jpg"><br>
+            <p> Gosha Rubchinskiy Socks - Гоша Рубчинский/Gosha Rubchinskiy is an up-and-coming Russian designer.  takes inspiration from the fall of the Iron Curtain, Russian street and youth culture, and his experiences to create his collections.</p><br>
+            <span id = "span2"></span><br>
+            <input type = "text" id = "qty2" placeholder = "Enter quantity #">
+        </div>
+
+        <hr>
+        <!-- Item 3 -->
+        <div>
+            <img src ="offwhite.jpg"><br>
+            <p> OFF-WHITE Socks - OFF-WHITE by Virgil Abloh sticks true to its classic striped black bars. These socks are very minimalist and are very similar to many of Abloh's designs.</p><br>
+            <span id = "span3"></span><br>
+            <input type = "text" id = "qty3" placeholder = "Enter quantity #">
+        </div>
+
+        <!-- Payment/Processing -->
+        <button onclick = "ProcessOrder()"> Process Order </button>
+        <br>
+        <div id = "output"></div>
+    </body>
+</html>
